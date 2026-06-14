@@ -1,111 +1,138 @@
 function App() {
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "32px",
-        color: "white"
-      }}
-    >
-      <section
-        style={{
-          width: "100%",
-          maxWidth: "920px",
-          padding: "42px",
-          borderRadius: "28px",
-          background: "rgba(15, 23, 42, 0.88)",
-          border: "1px solid rgba(148, 163, 184, 0.25)",
-          boxShadow: "0 24px 80px rgba(0, 0, 0, 0.35)"
-        }}
-      >
-        <p
-          style={{
-            margin: "0 0 14px",
-            color: "#93c5fd",
-            fontWeight: 700,
-            letterSpacing: "0.12em",
-            textTransform: "uppercase"
-          }}
-        >
-          SecureDev Agency Platform
-        </p>
+    <main className="page-shell">
+      <header className="site-header">
+        <div className="brand">
+          <div className="brand-mark">SD</div>
+          <div>
+            <strong>SecureDev Agency</strong>
+            <span>Fullstack Development & Security</span>
+          </div>
+        </div>
 
-        <h1
-          style={{
-            margin: 0,
-            fontSize: "clamp(2.2rem, 6vw, 4.8rem)",
-            lineHeight: 1,
-            letterSpacing: "-0.05em"
-          }}
-        >
-          Professionelle Fullstack-Plattform für eine Developer-Firma
-        </h1>
+        <nav className="main-nav" aria-label="Hauptnavigation">
+          <a href="#services">Leistungen</a>
+          <a href="#security">Security</a>
+          <a href="#status">Status</a>
+        </nav>
+      </header>
 
-        <p
-          style={{
-            maxWidth: "720px",
-            margin: "26px 0 0",
-            color: "#cbd5e1",
-            fontSize: "1.08rem",
-            lineHeight: 1.8
-          }}
-        >
-          Dieses Projekt wird Schritt für Schritt als echtes Portfolio-Projekt
-          aufgebaut: mit Frontend, Backend, API, Sicherheitsgrundlagen,
-          Kundenportal und Adminbereich.
-        </p>
+      <section className="hero-section">
+        <div className="hero-content">
+          <p className="eyebrow">SecureDev Agency Platform</p>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-            gap: "18px",
-            marginTop: "34px"
-          }}
-        >
-          <article
-            style={{
-              padding: "20px",
-              borderRadius: "20px",
-              background: "rgba(30, 41, 59, 0.75)",
-              border: "1px solid rgba(148, 163, 184, 0.18)"
-            }}
-          >
-            <span style={{ color: "#94a3b8" }}>Frontend</span>
-            <strong style={{ display: "block", marginTop: "8px" }}>
-              Läuft
-            </strong>
+          <h1>Professionelle Weblösungen mit Frontend, Backend und Security.</h1>
+
+          <p className="hero-text">
+            Diese Plattform wird als echtes Fullstack-Portfolio-Projekt aufgebaut:
+            mit moderner Firmen-Webseite, Backend-API, Sicherheitsgrundlagen,
+            Kundenportal und späterem Adminbereich.
+          </p>
+
+          <div className="hero-actions">
+            <a className="primary-button" href="#services">
+              Leistungen ansehen
+            </a>
+            <a className="secondary-button" href="#status">
+              Projektstatus prüfen
+            </a>
+          </div>
+        </div>
+
+        <aside className="hero-panel" aria-label="Projektübersicht">
+          <div className="panel-header">
+            <span>Live Project</span>
+            <strong>Version 2</strong>
+          </div>
+
+          <div className="metric-list">
+            <div className="metric-card">
+              <span>Frontend</span>
+              <strong>React + TypeScript</strong>
+            </div>
+
+            <div className="metric-card">
+              <span>Backend</span>
+              <strong>Node.js + Express</strong>
+            </div>
+
+            <div className="metric-card">
+              <span>Security</span>
+              <strong>Helmet + CORS</strong>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="services" className="content-section">
+        <div className="section-heading">
+          <p className="eyebrow">Leistungen</p>
+          <h2>Was diese Developer-Firma anbietet</h2>
+        </div>
+
+        <div className="service-grid">
+          <article className="service-card">
+            <span className="service-number">01</span>
+            <h3>Frontend Development</h3>
+            <p>
+              Moderne Benutzeroberflächen mit klarer Struktur, responsivem
+              Design und professioneller Nutzerführung.
+            </p>
           </article>
 
-          <article
-            style={{
-              padding: "20px",
-              borderRadius: "20px",
-              background: "rgba(30, 41, 59, 0.75)",
-              border: "1px solid rgba(148, 163, 184, 0.18)"
-            }}
-          >
-            <span style={{ color: "#94a3b8" }}>Backend</span>
-            <strong style={{ display: "block", marginTop: "8px" }}>
-              Läuft
-            </strong>
+          <article className="service-card">
+            <span className="service-number">02</span>
+            <h3>Backend APIs</h3>
+            <p>
+              Saubere Server-Strukturen, API-Endpunkte, Datenverarbeitung und
+              vorbereitete Erweiterbarkeit für echte Anwendungen.
+            </p>
           </article>
 
-          <article
-            style={{
-              padding: "20px",
-              borderRadius: "20px",
-              background: "rgba(30, 41, 59, 0.75)",
-              border: "1px solid rgba(148, 163, 184, 0.18)"
-            }}
-          >
-            <span style={{ color: "#94a3b8" }}>Security</span>
-            <strong style={{ display: "block", marginTop: "8px" }}>
-              Vorbereitet
-            </strong>
+          <article className="service-card">
+            <span className="service-number">03</span>
+            <h3>Security Basics</h3>
+            <p>
+              Defensive Sicherheitsmaßnahmen wie sichere Header, CORS-Regeln,
+              Rate-Limits, Validierung und geschützte Konfiguration.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="security" className="security-section">
+        <div>
+          <p className="eyebrow">Security</p>
+          <h2>Defensiv, sauber und legal aufgebaut.</h2>
+        </div>
+
+        <p>
+          Das Projekt setzt ausschließlich auf Schutzmaßnahmen für eigene Systeme.
+          Es geht nicht um Angriffe, sondern um professionelle Absicherung einer
+          Webplattform.
+        </p>
+      </section>
+
+      <section id="status" className="status-section">
+        <div className="section-heading">
+          <p className="eyebrow">Projektstatus</p>
+          <h2>Aktueller Entwicklungsstand</h2>
+        </div>
+
+        <div className="status-grid">
+          <article className="status-card">
+            <span>Version 1</span>
+            <strong>Grundstruktur läuft</strong>
+          </article>
+
+          <article className="status-card">
+            <span>Version 2</span>
+            <strong>Firmen-Startseite im Aufbau</strong>
+          </article>
+
+          <article className="status-card">
+            <span>Nächster Schritt</span>
+            <strong>Design verfeinern</strong>
           </article>
         </div>
       </section>
