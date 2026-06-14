@@ -1,12 +1,68 @@
+import { useEffect, useState } from "react";
+import {
+  CompanyStatusResponse,
+  fetchCompanyStatus
+} from "./services/companyStatusApi";
+
 function App() {
+  const [companyData, setCompanyData] = useState<CompanyStatusResponse | null>(
+    null
+  );
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    async function loadCompanyStatus() {
+      try {
+        const data = await fetchCompanyStatus();
+        setCompanyData(data);
+      } catch {
+        setErrorMessage("Backend-Daten konnten nicht geladen werden.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadCompanyStatus();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <main className="page-shell">
+        <section className="content-section">
+          <p className="eyebrow">API-Verbindung</p>
+          <h1>Firmenstatus wird geladen...</h1>
+          <p className="hero-text">
+            Das Frontend fragt gerade die Backend-API ab.
+          </p>
+        </section>
+      </main>
+    );
+  }
+
+  if (errorMessage || !companyData) {
+    return (
+      <main className="page-shell">
+        <section className="content-section">
+          <p className="eyebrow">API-Fehler</p>
+          <h1>Backend nicht erreichbar.</h1>
+          <p className="hero-text">
+            {errorMessage} Bitte prüfe, ob der Backend-Server auf
+            http://localhost:4000 läuft.
+          </p>
+        </section>
+      </main>
+    );
+  }
+
   return (
     <main className="page-shell">
       <header className="site-header">
         <div className="brand">
           <div className="brand-mark">SD</div>
           <div>
-            <strong>SecureDev Agency</strong>
-            <span>Fullstack Development & Security</span>
+            <strong>{companyData.company.name}</strong>
+            <span>{companyData.company.slogan}</span>
           </div>
         </div>
 
@@ -19,14 +75,14 @@ function App() {
 
       <section className="hero-section">
         <div className="hero-content">
-          <p className="eyebrow">SecureDev Agency Platform</p>
+          <p className="eyebrow">{companyData.company.project}</p>
 
           <h1>Professionelle Weblösungen mit Frontend, Backend und Security.</h1>
 
           <p className="hero-text">
-            Diese Plattform wird als echtes Fullstack-Portfolio-Projekt aufgebaut:
-            mit moderner Firmen-Webseite, Backend-API, Sicherheitsgrundlagen,
-            Kundenportal und späterem Adminbereich.
+            Diese Plattform zeigt jetzt echte Fullstack-Kommunikation: Das
+            Frontend lädt Firmenstatus, Leistungen und Projektinformationen
+            direkt aus der Backend-API.
           </p>
 
           <div className="hero-actions">
@@ -34,31 +90,36 @@ function App() {
               Leistungen ansehen
             </a>
             <a className="secondary-button" href="#status">
-              Projektstatus prüfen
+              API-Status prüfen
             </a>
           </div>
         </div>
 
         <aside className="hero-panel" aria-label="Projektübersicht">
           <div className="panel-header">
-            <span>Live Project</span>
-            <strong>Version 2</strong>
+            <span>Live API Project</span>
+            <strong>Version {companyData.company.version}</strong>
           </div>
 
           <div className="metric-list">
             <div className="metric-card">
               <span>Frontend</span>
-              <strong>React + TypeScript</strong>
+              <strong>{companyData.status.frontend}</strong>
             </div>
 
             <div className="metric-card">
               <span>Backend</span>
-              <strong>Node.js + Express</strong>
+              <strong>{companyData.status.backend}</strong>
             </div>
 
             <div className="metric-card">
               <span>Security</span>
-              <strong>Helmet + CORS</strong>
+              <strong>{companyData.status.security}</strong>
+            </div>
+
+            <div className="metric-card">
+              <span>API</span>
+              <strong>{companyData.status.api}</strong>
             </div>
           </div>
         </aside>
@@ -66,37 +127,20 @@ function App() {
 
       <section id="services" className="content-section">
         <div className="section-heading">
-          <p className="eyebrow">Leistungen</p>
+          <p className="eyebrow">Leistungen aus der API</p>
           <h2>Was diese Developer-Firma anbietet</h2>
         </div>
 
         <div className="service-grid">
-          <article className="service-card">
-            <span className="service-number">01</span>
-            <h3>Frontend Development</h3>
-            <p>
-              Moderne Benutzeroberflächen mit klarer Struktur, responsivem
-              Design und professioneller Nutzerführung.
-            </p>
-          </article>
-
-          <article className="service-card">
-            <span className="service-number">02</span>
-            <h3>Backend APIs</h3>
-            <p>
-              Saubere Server-Strukturen, API-Endpunkte, Datenverarbeitung und
-              vorbereitete Erweiterbarkeit für echte Anwendungen.
-            </p>
-          </article>
-
-          <article className="service-card">
-            <span className="service-number">03</span>
-            <h3>Security Basics</h3>
-            <p>
-              Defensive Sicherheitsmaßnahmen wie sichere Header, CORS-Regeln,
-              Rate-Limits, Validierung und geschützte Konfiguration.
-            </p>
-          </article>
+          {companyData.services.map((service) => (
+            <article className="service-card" key={service.id}>
+              <span className="service-number">
+                {String(service.id).padStart(2, "0")}
+              </span>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -107,33 +151,25 @@ function App() {
         </div>
 
         <p>
-          Das Projekt setzt ausschließlich auf Schutzmaßnahmen für eigene Systeme.
-          Es geht nicht um Angriffe, sondern um professionelle Absicherung einer
-          Webplattform.
+          Das Projekt setzt ausschließlich auf Schutzmaßnahmen für eigene
+          Systeme. Die Sicherheitsinformationen kommen jetzt aus dem Backend und
+          werden im Frontend angezeigt.
         </p>
       </section>
 
       <section id="status" className="status-section">
         <div className="section-heading">
-          <p className="eyebrow">Projektstatus</p>
+          <p className="eyebrow">Projektstatus aus der API</p>
           <h2>Aktueller Entwicklungsstand</h2>
         </div>
 
         <div className="status-grid">
-          <article className="status-card">
-            <span>Version 1</span>
-            <strong>Grundstruktur läuft</strong>
-          </article>
-
-          <article className="status-card">
-            <span>Version 2</span>
-            <strong>Firmen-Startseite im Aufbau</strong>
-          </article>
-
-          <article className="status-card">
-            <span>Nächster Schritt</span>
-            <strong>Design verfeinern</strong>
-          </article>
+          {companyData.projectStatus.map((item) => (
+            <article className="status-card" key={item.label}>
+              <span>{item.label}</span>
+              <strong>{item.value}</strong>
+            </article>
+          ))}
         </div>
       </section>
     </main>

@@ -2,6 +2,53 @@
 
 Alle wichtigen Änderungen an diesem Projekt werden in dieser Datei dokumentiert.
 
+## Version 3.0.0 - Backend-API mit Firmenstatus verbunden
+
+### Erstellt
+
+- neue Backend-Route für Firmenstatus erstellt
+- neuer API-Endpunkt `/api/company-status` ergänzt
+- Frontend-Service `companyStatusApi.ts` erstellt
+- TypeScript-Typen für API-Daten ergänzt
+- Frontend lädt Firmenstatus jetzt aus dem Backend
+- Startseite zeigt API-Daten dynamisch an
+
+### Geändert
+
+- Backend-App mit neuer Firmenstatus-Route verbunden
+- App.tsx auf API-Daten umgebaut
+- Projektstatus auf Version 3 aktualisiert
+- Hero-Bereich erklärt jetzt echte Fullstack-Kommunikation
+- Statuskarten zeigen Daten aus der Backend-API
+
+### Ziel dieser Version
+
+Version 3 verbindet Frontend und Backend miteinander.
+
+Das Frontend zeigt nicht mehr nur feste Texte aus dem Code, sondern lädt echte Projektdaten über die Backend-API.
+
+### Test
+
+Backend-API wurde im Browser getestet:
+
+http://localhost:4000/api/company-status
+
+Frontend wurde im Browser getestet:
+
+http://localhost:5173
+
+### Ergebnis
+
+Version 3 läuft sichtbar im Browser.
+
+Die Webseite zeigt:
+
+- Live API Project
+- Version 3.0.0
+- API-Status
+- Backend-geladene Leistungen
+- Backend-geladene Projektstatus-Daten
+
 ## Version 2.0.0 - Professionelle Firmen-Startseite
 
 ### Geändert
@@ -25,7 +72,7 @@ Die Plattform wirkt dadurch mehr wie ein echtes Fullstack-Projekt einer Develope
 
 ### Status
 
-Version 2 läuft im Browser.
+Version 2 läuft im Browser und wurde über einen Pull Request in main übernommen.
 
 ## Version 1.0.0 - Projekt-Grundstruktur
 
@@ -51,16 +98,6 @@ Version 2 läuft im Browser.
 ### Ziel dieser Version
 
 Version 1 erstellt die technische Grundstruktur für ein professionelles Fullstack-Projekt.
-
-Das Projekt soll später enthalten:
-
-- öffentliche Firmen-Webseite
-- Backend-API
-- Kundenbereich
-- Adminbereich
-- Sicherheitsfunktionen
-- Dokumentation
-- GitHub-taugliche Projektstruktur
 
 ### Status
 
