@@ -2,6 +2,49 @@
 
 Alle wichtigen Änderungen an diesem Projekt werden in dieser Datei dokumentiert.
 
+## Version 4.0.0 - Kontakt-API und Kontaktbereich
+
+### Erstellt
+
+- neue Backend-Route `contact.routes.ts` erstellt
+- API-Endpunkt `/api/contact-info` ergänzt
+- API-Endpunkt `/api/contact-request` ergänzt
+- Frontend-Service `contactApi.ts` erstellt
+- Kontaktbereich auf der Startseite ergänzt
+- Kontaktformular eingebaut
+- Kontaktformular sendet Daten an das Backend
+- Kontaktfeedback im Frontend ergänzt
+
+### Geändert
+
+- Backend-App mit Kontakt-Routen verbunden
+- App.tsx um Kontaktbereich und Kontaktformular erweitert
+- App.css um Kontaktbereich, Formularfelder und Feedback erweitert
+- Navigation um Kontakt-Link ergänzt
+- Projektanzeige auf Version 4.0.0 aktualisiert
+
+### Ziel dieser Version
+
+Version 4 ergänzt eine echte Kontaktstruktur zwischen Frontend und Backend.
+
+Das Frontend kann Kontaktinformationen aus dem Backend laden und Kontaktanfragen per POST an die Backend-API senden.
+
+### Test
+
+Backend-Endpunkte:
+
+http://localhost:4000/api/contact-info
+
+http://localhost:4000/api/contact-request
+
+Frontend:
+
+http://localhost:5173
+
+### Ergebnis
+
+Version 4 verbindet Kontaktbereich und Kontakt-API.
+
 ## Version 3.0.0 - Backend-API mit Firmenstatus verbunden
 
 ### Erstellt
@@ -25,29 +68,9 @@ Alle wichtigen Änderungen an diesem Projekt werden in dieser Datei dokumentiert
 
 Version 3 verbindet Frontend und Backend miteinander.
 
-Das Frontend zeigt nicht mehr nur feste Texte aus dem Code, sondern lädt echte Projektdaten über die Backend-API.
+### Status
 
-### Test
-
-Backend-API wurde im Browser getestet:
-
-http://localhost:4000/api/company-status
-
-Frontend wurde im Browser getestet:
-
-http://localhost:5173
-
-### Ergebnis
-
-Version 3 läuft sichtbar im Browser.
-
-Die Webseite zeigt:
-
-- Live API Project
-- Version 3.0.0
-- API-Status
-- Backend-geladene Leistungen
-- Backend-geladene Projektstatus-Daten
+Version 3 läuft im Browser und wurde über einen Pull Request in main übernommen.
 
 ## Version 2.0.0 - Professionelle Firmen-Startseite
 
@@ -63,12 +86,6 @@ Die Webseite zeigt:
 - Security-Bereich eingebaut
 - Projektstatus-Bereich eingebaut
 - modernes dunkles Developer-Firma-Design ergänzt
-
-### Ziel dieser Version
-
-Version 2 macht aus der einfachen Startseite eine professionelle Firmen-Webseite.
-
-Die Plattform wirkt dadurch mehr wie ein echtes Fullstack-Projekt einer Developer-Firma.
 
 ### Status
 
@@ -94,10 +111,6 @@ Version 2 läuft im Browser und wurde über einen Pull Request in main übernomm
 - Git eingerichtet
 - erster Commit erstellt
 - Projekt auf GitHub hochgeladen
-
-### Ziel dieser Version
-
-Version 1 erstellt die technische Grundstruktur für ein professionelles Fullstack-Projekt.
 
 ### Status
 

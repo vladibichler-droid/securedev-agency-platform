@@ -1,21 +1,42 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import {
   CompanyStatusResponse,
   fetchCompanyStatus
 } from "./services/companyStatusApi";
+import {
+  ContactInfo,
+  ContactRequestPayload,
+  fetchContactInfo,
+  sendContactRequest
+} from "./services/contactApi";
 
 function App() {
   const [companyData, setCompanyData] = useState<CompanyStatusResponse | null>(
     null
   );
+  const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const [contactForm, setContactForm] = useState<ContactRequestPayload>({
+    name: "",
+    email: "",
+    topic: "Webentwicklung",
+    message: ""
+  });
+
+  const [contactFeedback, setContactFeedback] = useState("");
+
   useEffect(() => {
-    async function loadCompanyStatus() {
+    async function loadPageData() {
       try {
-        const data = await fetchCompanyStatus();
-        setCompanyData(data);
+        const [companyStatusData, contactInfoData] = await Promise.all([
+          fetchCompanyStatus(),
+          fetchContactInfo()
+        ]);
+
+        setCompanyData(companyStatusData);
+        setContactInfo(contactInfoData);
       } catch {
         setErrorMessage("Backend-Daten konnten nicht geladen werden.");
       } finally {
@@ -23,8 +44,32 @@ function App() {
       }
     }
 
-    loadCompanyStatus();
+    loadPageData();
   }, []);
+
+  async function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setContactFeedback("Kontaktanfrage wird gesendet...");
+
+    try {
+      const response = await sendContactRequest(contactForm);
+
+      setContactFeedback(`${response.message} Anfrage-ID: ${response.request?.id}`);
+      setContactForm({
+        name: "",
+        email: "",
+        topic: "Webentwicklung",
+        message: ""
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        setContactFeedback(error.message);
+        return;
+      }
+
+      setContactFeedback("Kontaktanfrage konnte nicht gesendet werden.");
+    }
+  }
 
   if (isLoading) {
     return (
@@ -40,7 +85,7 @@ function App() {
     );
   }
 
-  if (errorMessage || !companyData) {
+  if (errorMessage || !companyData || !contactInfo) {
     return (
       <main className="page-shell">
         <section className="content-section">
@@ -69,6 +114,7 @@ function App() {
         <nav className="main-nav" aria-label="Hauptnavigation">
           <a href="#services">Leistungen</a>
           <a href="#security">Security</a>
+          <a href="#contact">Kontakt</a>
           <a href="#status">Status</a>
         </nav>
       </header>
@@ -80,14 +126,14 @@ function App() {
           <h1>Professionelle Weblösungen mit Frontend, Backend und Security.</h1>
 
           <p className="hero-text">
-            Diese Plattform zeigt jetzt echte Fullstack-Kommunikation: Das
-            Frontend lädt Firmenstatus, Leistungen und Projektinformationen
-            direkt aus der Backend-API.
+            Diese Plattform zeigt echte Fullstack-Kommunikation: Das Frontend
+            lädt Firmenstatus, Leistungen, Kontaktinformationen und
+            Projektinformationen direkt aus der Backend-API.
           </p>
 
           <div className="hero-actions">
-            <a className="primary-button" href="#services">
-              Leistungen ansehen
+            <a className="primary-button" href="#contact">
+              Kontakt aufnehmen
             </a>
             <a className="secondary-button" href="#status">
               API-Status prüfen
@@ -98,7 +144,7 @@ function App() {
         <aside className="hero-panel" aria-label="Projektübersicht">
           <div className="panel-header">
             <span>Live API Project</span>
-            <strong>Version {companyData.company.version}</strong>
+            <strong>Version 4.0.0</strong>
           </div>
 
           <div className="metric-list">
@@ -118,8 +164,8 @@ function App() {
             </div>
 
             <div className="metric-card">
-              <span>API</span>
-              <strong>{companyData.status.api}</strong>
+              <span>Kontakt-API</span>
+              <strong>Aktiv</strong>
             </div>
           </div>
         </aside>
@@ -152,9 +198,121 @@ function App() {
 
         <p>
           Das Projekt setzt ausschließlich auf Schutzmaßnahmen für eigene
-          Systeme. Die Sicherheitsinformationen kommen jetzt aus dem Backend und
-          werden im Frontend angezeigt.
+          Systeme. Die Sicherheitsinformationen kommen aus dem Backend und werden
+          im Frontend angezeigt.
         </p>
+      </section>
+
+      <section id="contact" className="contact-section">
+        <div className="section-heading">
+          <p className="eyebrow">Kontakt-API</p>
+          <h2>Projektanfrage an SecureDev senden</h2>
+        </div>
+
+        <div className="contact-layout">
+          <aside className="contact-info-card">
+            <h3>{contactInfo.company}</h3>
+            <p>
+              Für Projektanfragen, Webentwicklung, Backend-APIs und
+              Security-Grundlagen.
+            </p>
+
+            <div className="contact-list">
+              <div>
+                <span>E-Mail</span>
+                <strong>{contactInfo.email}</strong>
+              </div>
+
+              <div>
+                <span>Telefon</span>
+                <strong>{contactInfo.phone}</strong>
+              </div>
+
+              <div>
+                <span>Standort</span>
+                <strong>{contactInfo.location}</strong>
+              </div>
+
+              <div>
+                <span>Antwortzeit</span>
+                <strong>{contactInfo.responseTime}</strong>
+              </div>
+            </div>
+          </aside>
+
+          <form className="contact-form" onSubmit={handleContactSubmit}>
+            <label>
+              Name
+              <input
+                value={contactForm.name}
+                onChange={(event) =>
+                  setContactForm({
+                    ...contactForm,
+                    name: event.target.value
+                  })
+                }
+                placeholder="Dein Name"
+              />
+            </label>
+
+            <label>
+              E-Mail
+              <input
+                type="email"
+                value={contactForm.email}
+                onChange={(event) =>
+                  setContactForm({
+                    ...contactForm,
+                    email: event.target.value
+                  })
+                }
+                placeholder="name@example.com"
+              />
+            </label>
+
+            <label>
+              Thema
+              <select
+                value={contactForm.topic}
+                onChange={(event) =>
+                  setContactForm({
+                    ...contactForm,
+                    topic: event.target.value
+                  })
+                }
+              >
+                {contactInfo.topics.map((topic) => (
+                  <option value={topic} key={topic}>
+                    {topic}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              Nachricht
+              <textarea
+                value={contactForm.message}
+                onChange={(event) =>
+                  setContactForm({
+                    ...contactForm,
+                    message: event.target.value
+                  })
+                }
+                placeholder="Kurze Beschreibung deiner Anfrage"
+                rows={5}
+              />
+            </label>
+
+            <button className="primary-button" type="submit">
+              Anfrage an Backend senden
+            </button>
+
+            {contactFeedback && (
+              <p className="contact-feedback">{contactFeedback}</p>
+            )}
+          </form>
+        </div>
       </section>
 
       <section id="status" className="status-section">
@@ -170,6 +328,11 @@ function App() {
               <strong>{item.value}</strong>
             </article>
           ))}
+
+          <article className="status-card">
+            <span>Version 4</span>
+            <strong>Kontakt-API + Kontaktbereich aktiv</strong>
+          </article>
         </div>
       </section>
     </main>
