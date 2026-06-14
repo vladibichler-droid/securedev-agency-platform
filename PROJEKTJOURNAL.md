@@ -12,19 +12,6 @@ SecureDev Agency Platform ist ein professionelles Fullstack-Projekt für eine fi
 
 Das Projekt soll nicht wie ein Simulator wirken, sondern wie ein echtes Entwickler-Firmenprojekt.
 
-## Ziel
-
-Das Projekt soll zeigen:
-
-- professionelle Webentwicklung
-- klare Projektstruktur
-- Frontend und Backend
-- API-Kommunikation
-- Sicherheitsgrundlagen
-- Dokumentation
-- schrittweise Entwicklung
-- GitHub-taugliche Arbeitsweise
-
 ## Arbeitsregeln
 
 Für dieses Projekt gelten feste Regeln:
@@ -37,47 +24,50 @@ Für dieses Projekt gelten feste Regeln:
 - jede Version wird dokumentiert
 - Git-Branch pro größerem Entwicklungsschritt
 
-## Version 3 - Backend-API mit Firmenstatus verbinden
+## Version 4 - Kontakt-API + Kontaktbereich
 
 ### Stand
 
-Version 3 wurde auf einem eigenen Git-Branch entwickelt:
+Version 4 wurde auf einem eigenen Git-Branch gestartet:
 
-version-3-backend-firmenstatus
-
-Die Backend-API wurde im Browser getestet.
-
-Das Frontend wurde im Browser getestet.
+version-4-kontakt-api
 
 ### Änderung
 
 Erstellt und geändert wurden:
 
-- backend/src/routes/company-status.routes.ts
+- backend/src/routes/contact.routes.ts
 - backend/src/app.ts
-- frontend/src/services/companyStatusApi.ts
+- frontend/src/services/contactApi.ts
 - frontend/src/App.tsx
+- frontend/src/App.css
 - CHANGELOG.md
 - PROJEKTJOURNAL.md
 
-Die neue API liefert:
+Die neue Kontakt-API enthält:
 
-- Firmenname
-- Slogan
-- Projektname
-- Version
-- Frontend-Status
-- Backend-Status
-- Security-Status
-- API-Status
-- Leistungen
-- Projektstatus
+- GET `/api/contact-info`
+- POST `/api/contact-request`
+
+Das Frontend enthält jetzt:
+
+- Kontaktbereich
+- Kontaktinformationen aus der API
+- Kontaktformular
+- Themenauswahl aus Backend-Daten
+- Feedback nach dem Absenden
 
 ### Zweck
 
-Version 3 verbindet das Frontend mit dem Backend.
+Version 4 erweitert die Plattform um eine Kontaktfunktion.
 
-Die Webseite zeigt dadurch nicht mehr nur feste Inhalte aus dem Frontend-Code, sondern lädt echte Daten aus der Backend-API.
+Dadurch wirkt die Seite stärker wie eine echte Firmen-Webseite mit Backend-Kommunikation.
+
+### Ergebnis
+
+Die Plattform besitzt jetzt eine vorbereitete Kontakt-API und einen sichtbaren Kontaktbereich im Frontend.
+
+## Version 3 - Backend-API mit Firmenstatus verbinden
 
 ### Ergebnis
 
@@ -97,41 +87,6 @@ Version 3 macht das Projekt zu einem echten Fullstack-Projekt mit Kommunikation 
 
 ## Version 2 - Professionelle Firmen-Startseite
 
-### Stand
-
-Version 2 wurde auf einem eigenen Git-Branch gestartet:
-
-version-2-firmen-startseite
-
-Die Webseite wurde im Browser getestet und ist sichtbar.
-
-### Änderung
-
-Geändert wurden:
-
-- frontend/src/main.tsx
-- frontend/src/App.tsx
-- frontend/src/App.css
-- CHANGELOG.md
-- PROJEKTJOURNAL.md
-
-Die Startseite enthält jetzt:
-
-- Header mit Markenbereich
-- Navigation
-- großen Hero-Bereich
-- Projektübersicht
-- Leistungsbereich
-- Security-Bereich
-- Projektstatus-Bereich
-- professionelles dunkles Developer-Firma-Design
-
-### Zweck
-
-Version 2 soll die Plattform deutlich professioneller wirken lassen.
-
-Die Webseite soll aussehen wie der Einstieg einer echten Developer-Firma und nicht wie ein kleines Testprojekt.
-
 ### Ergebnis
 
 Die Firmen-Startseite ist sichtbar und deutlich hochwertiger aufgebaut.
@@ -141,34 +96,6 @@ Das Frontend wirkt jetzt strukturierter, moderner und portfolio-tauglicher.
 Version 2 wurde über einen Pull Request in main übernommen.
 
 ## Version 1 - Projekt-Grundstruktur
-
-### Stand
-
-Das Projekt wurde neu gestartet.
-
-Die Grundstruktur wurde erstellt.
-
-### Änderung
-
-Erstellt wurden:
-
-- frontend
-- backend
-- docs
-- README.md
-- CHANGELOG.md
-- PROJEKTJOURNAL.md
-- SECURITY.md
-- package.json
-- package-lock.json
-- .gitignore
-- .env.example
-
-### Zweck
-
-Version 1 legt die Grundlage für das gesamte Fullstack-Projekt.
-
-Diese Version sorgt dafür, dass das Projekt sauber vorbereitet ist, bevor Frontend, Backend und Security-Funktionen weiter ausgebaut werden.
 
 ### Ergebnis
 

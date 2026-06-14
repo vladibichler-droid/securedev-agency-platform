@@ -1,6 +1,7 @@
 import express from "express";
 import healthRoutes from "./routes/health.routes.js";
 import companyStatusRoutes from "./routes/company-status.routes.js";
+import contactRoutes from "./routes/contact.routes.js";
 import { securityMiddleware } from "./middleware/security.middleware.js";
 
 const app = express();
@@ -17,5 +18,6 @@ app.get("/", (_request, response) => {
 
 app.use("/api", healthRoutes);
 app.use("/api", companyStatusRoutes);
+app.use("/api", contactRoutes);
 
 export default app;

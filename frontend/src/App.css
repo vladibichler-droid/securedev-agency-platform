@@ -84,6 +84,7 @@
 .hero-panel,
 .content-section,
 .security-section,
+.contact-section,
 .status-section {
   border: 1px solid rgba(148, 163, 184, 0.18);
   background: rgba(15, 23, 42, 0.78);
@@ -164,9 +165,11 @@ h3 {
   justify-content: center;
   min-height: 48px;
   padding: 0 18px;
+  border: 0;
   border-radius: 999px;
   font-weight: 900;
   text-decoration: none;
+  cursor: pointer;
   transition:
     transform 0.2s ease,
     border-color 0.2s ease,
@@ -227,7 +230,9 @@ h3 {
 
 .metric-card,
 .status-card,
-.service-card {
+.service-card,
+.contact-info-card,
+.contact-form {
   border: 1px solid rgba(148, 163, 184, 0.18);
   border-radius: 24px;
   background: rgba(30, 41, 59, 0.58);
@@ -238,7 +243,8 @@ h3 {
 }
 
 .metric-card span,
-.status-card span {
+.status-card span,
+.contact-list span {
   display: block;
   color: #94a3b8;
   font-size: 0.9rem;
@@ -246,13 +252,15 @@ h3 {
 }
 
 .metric-card strong,
-.status-card strong {
+.status-card strong,
+.contact-list strong {
   color: #f8fafc;
   font-size: 1.08rem;
 }
 
 .content-section,
 .security-section,
+.contact-section,
 .status-section {
   margin-top: 24px;
   padding: 38px;
@@ -291,7 +299,8 @@ h3 {
 }
 
 .service-card p,
-.security-section p {
+.security-section p,
+.contact-info-card p {
   color: #cbd5e1;
   line-height: 1.75;
   margin-bottom: 0;
@@ -307,6 +316,61 @@ h3 {
     rgba(15, 23, 42, 0.78);
 }
 
+.contact-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 18px;
+}
+
+.contact-info-card,
+.contact-form {
+  padding: 24px;
+}
+
+.contact-list {
+  display: grid;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.contact-form {
+  display: grid;
+  gap: 16px;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 8px;
+  color: #dbeafe;
+  font-weight: 800;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 16px;
+  color: #f8fafc;
+  background: rgba(15, 23, 42, 0.75);
+  padding: 14px 16px;
+  font: inherit;
+  outline: none;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: rgba(147, 197, 253, 0.7);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.18);
+}
+
+.contact-feedback {
+  margin-bottom: 0;
+  color: #bfdbfe;
+  line-height: 1.6;
+}
+
 .status-card {
   padding: 22px;
 }
@@ -314,7 +378,8 @@ h3 {
 @media (max-width: 920px) {
   .site-header,
   .hero-section,
-  .security-section {
+  .security-section,
+  .contact-layout {
     grid-template-columns: 1fr;
   }
 
@@ -350,6 +415,7 @@ h3 {
 
   .content-section,
   .security-section,
+  .contact-section,
   .status-section {
     padding: 28px 22px;
   }
